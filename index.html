@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare Buddy 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>🌸 MindCare Buddy</h1>
+    <p>Your voice companion for emotional well-being</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Daily Mood Check-In</h2>
+      <button id="speakBtn">🎤 Speak</button>
+      <div id="assistantReply">Your assistant's response will appear here...</div>
+    </section>
+
+    <section class="card">
+      <h2>Cycle & Elderly Care</h2>
+      <ul>
+        <li>🌙 PMS week coming up: Try extra self-care</li>
+        <li>🤰 Trimester 2: Remember hydration!</li>
+        <li>👵 Took meds today? ✔️</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Mood Trend</h2>
+      <canvas id="moodChart"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 💜 for Hackathon</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
