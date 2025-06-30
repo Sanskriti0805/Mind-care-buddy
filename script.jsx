@@ -118,7 +118,7 @@ function showPage(pageId) {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        &rbrace;
+        }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -126,13 +126,13 @@ function showPage(pageId) {
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
-        &rbrace;
+        }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        &rbrace;
+        }
 
         /* Navigation */
         .navbar {
@@ -145,7 +145,7 @@ function showPage(pageId) {
             right: 0;
             z-index: 1000;
             transition: all 0.3s ease;
-        &rbrace;
+        }
 
         .nav-container {
             max-width: 1200px;
@@ -155,18 +155,18 @@ function showPage(pageId) {
             align-items: center;
             padding: 0 20px;
             height: 70px;
-        &rbrace;
+        }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 600;
             color: #764ba2;
-        &rbrace;
+        }
 
         .nav-menu {
             display: flex;
             gap: 30px;
-        &rbrace;
+        }
 
         .nav-link {
             text-decoration: none;
@@ -178,19 +178,19 @@ function showPage(pageId) {
             display: flex;
             align-items: center;
             gap: 8px;
-        &rbrace;
+        }
 
         .nav-link:hover {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             transform: translateY(-2px);
-        &rbrace;
+        }
 
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-        &rbrace;
+        }
 
         .hamburger span {
             width: 25px;
@@ -198,7 +198,7 @@ function showPage(pageId) {
             background: #764ba2;
             margin: 3px 0;
             transition: 0.3s;
-        &rbrace;
+        }
 
         /* Pages */
         .page {
@@ -206,16 +206,16 @@ function showPage(pageId) {
             margin-top: 70px;
             min-height: calc(100vh - 70px);
             animation: fadeIn 0.5s ease-in;
-        &rbrace;
+        }
 
         .page.active {
             display: block;
-        &rbrace;
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); &rbrace;
-            to { opacity: 1; transform: translateY(0); &rbrace;
-        &rbrace;
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .page-header {
             text-align: center;
