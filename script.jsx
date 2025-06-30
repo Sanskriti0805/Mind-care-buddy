@@ -1,114 +1,116 @@
-// Global State Management
-        let currentPage = 'dashboard';
-        let isRecording = false;
-        let breathingInterval = null;
-        let breathingPhase = 'inhale';
-        let userSettings = {
-            careMode: 'general',
-            userName: 'Sarah',
-            cycleDay: 14,
-            pregnancyWeek: 20
-        };
+let currentPage = 'dashboard';
+let isRecording = false;
+let breathingInterval = null;
+let breathingPhase = 'inhale';
+let userSettings = {
+    careMode: 'general',
+    userName: 'Sarah',
+    cycleDay: 14,
+    pregnancyWeek: 20
+};
 
-        // User data storage (in-memory)
-        let userData = {
-            moods: [],
-            cycleData: {
-                currentDay: 14,
-                phase: 'ovulation',
-                lastPeriod: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
-            },
-            pregnancyData: {
-                week: 20,
-                dueDate: new Date(Date.now() + 140 * 24 * 60 * 60 * 1000)
-            },
-            elderlyReminders: [
-                { id: 1, text: 'Take morning medication', time: '8:00 AM', completed: true },
-                { id: 2, text: 'Lunch Time', time: '12:30 PM', completed: false },
-                { id: 3, text: 'Call Sarah', time: '3:00 PM', completed: false }
-            ]
-        };
+// User data storage (in-memory)
+let userData = {
+    moods: [],
+    cycleData: {
+        currentDay: 14,
+        phase: 'ovulation',
+        lastPeriod: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
+    },
+    pregnancyData: {
+        week: 20,
+        dueDate: new Date(Date.now() + 140 * 24 * 60 * 60 * 1000)
+    },
+    elderlyReminders: [
+        { id: 1, text: 'Take morning medication', time: '8:00 AM', completed: true },
+        { id: 2, text: 'Lunch Time', time: '12:30 PM', completed: false },
+        { id: 3, text: 'Call Sarah', time: '3:00 PM', completed: false }
+    ]
+};
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            setupEventListeners();
-            updateDashboard();
-        {"}"});
+// Initialize the app
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+    setupEventListeners();
+    updateDashboard();
+});
 
-        function initializeApp() {
-            // Set initial page
-            showPage('dashboard');
-            
-            // Update user-specific content
-            updateUserContent();
-            
-            // Initialize voice features if available
-            initializeVoiceFeatures();
-            
-            // Set up responsive navigation
-            setupResponsiveNav();
-        {"}"}
+function initializeApp() {
+    // Set initial page
+    showPage('dashboard');
+    
+    // Update user-specific content
+    updateUserContent();
+    
+    // Initialize voice features if available
+    initializeVoiceFeatures();
+    
+    // Set up responsive navigation
+    setupResponsiveNav();
+}
 
-        function setupEventListeners() {
-            // Navigation hamburger
-            const hamburger = document.getElementById('hamburger');
+function setupEventListeners() {
+    // Navigation hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Close nav menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar') && navMenu) {
+            navMenu.classList.remove('active');
+        }
+    });
+
+    // Voice button
+    const voiceBtn = document.getElementById('voiceBtn');
+    if (voiceBtn) {
+        voiceBtn.addEventListener('click', toggleVoiceRecording);
+    }
+
+    // Mood chart interactions
+    const chartBars = document.querySelectorAll('.bar');
+    chartBars.forEach(bar => {
+        bar.addEventListener('mouseenter', showBarTooltip);
+        bar.addEventListener('mouseleave', hideBarTooltip);
+    });
+}
+
+function setupResponsiveNav() {
+    // Close mobile menu when nav link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
             const navMenu = document.getElementById('nav-menu');
-            
-            if (hamburger && navMenu) {
-                hamburger.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                });
-            {"}"}
+            if (navMenu) {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+}
 
-            // Close nav menu when clicking outside
-            document.addEventListener('click', (e) ={">"} {
-                if (!e.target.closest('.navbar') && navMenu) {
-                    navMenu.classList.remove('active');
-                {"}"}
-            {"}"});
+// Page Navigation
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+}
 
-            // Voice button
-            const voiceBtn = document.getElementById('voiceBtn');
-            if (voiceBtn) {
-                voiceBtn.addEventListener('click', toggleVoiceRecording);
-            {"}"}
-
-            // Mood chart interactions
-            const chartBars = document.querySelectorAll('.bar');
-            chartBars.forEach(bar ={">"} {
-                bar.addEventListener('mouseenter', showBarTooltip);
-                bar.addEventListener('mouseleave', hideBarTooltip);
-            {"}"});
-        {"}"}
-
-        function setupResponsiveNav() {
-            // Close mobile menu when nav link is clicked
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navMenu = document.getElementById('nav-menu');
-                    if (navMenu) {
-                        navMenu.classList.remove('active');
-                    }
-                });
-            });
-        {"}"}
-
-        // Page Navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.<!DOCTYPE html{">"}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charSet="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🌸 MindCare Buddy</title>
     <style>
         /* Reset and Base Styles */
@@ -116,7 +118,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        {"}"}
+        }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -124,13 +126,13 @@
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
-        {"}"}
+        }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        {"}"}
+        }
 
         /* Navigation */
         .navbar {
@@ -143,7 +145,7 @@
             right: 0;
             z-index: 1000;
             transition: all 0.3s ease;
-        {"}"}
+        }
 
         .nav-container {
             max-width: 1200px;
@@ -153,18 +155,18 @@
             align-items: center;
             padding: 0 20px;
             height: 70px;
-        {"}"}
+        }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 600;
             color: #764ba2;
-        {"}"}
+        }
 
         .nav-menu {
             display: flex;
             gap: 30px;
-        {"}"}
+        }
 
         .nav-link {
             text-decoration: none;
@@ -176,19 +178,19 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        {"}"}
+        }
 
         .nav-link:hover {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             transform: translateY(-2px);
-        {"}"}
+        }
 
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-        {"}"}
+        }
 
         .hamburger span {
             width: 25px;
@@ -196,7 +198,7 @@
             background: #764ba2;
             margin: 3px 0;
             transition: 0.3s;
-        {"}"}
+        }
 
         /* Pages */
         .page {
@@ -204,241 +206,238 @@
             margin-top: 70px;
             min-height: calc(100vh - 70px);
             animation: fadeIn 0.5s ease-in;
-        {"}"}
+        }
 
         .page.active {
             display: block;
-        {"}"}
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); {"}"}
-            to { opacity: 1; transform: translateY(0); {"}"}
-        {"}"}
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .page-header {
             text-align: center;
             margin-bottom: 40px;
             padding: 40px 20px;
-        {"}"}
+        }
 
-        .page-header h1 {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        {"}"}
+.page-header h1 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-        {"}"}
+/* Dashboard */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
 
-        /* Dashboard */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        {"}"}
+.action-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
-        .action-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        {"}"}
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
 
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        {"}"}
+.action-card.primary {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: white;
+}
 
-        .action-card.primary {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            color: white;
-        {"}"}
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
 
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        {"}"}
+.action-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
 
-        .action-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        {"}"}
+.btn-speak {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
 
-        .btn-speak {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        {"}"}
+.btn-speak:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+.btn-action {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
 
-        .btn-speak:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        {"}"}
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .btn-action {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        {"}"}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-        .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        {"}"}
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        {"}"}
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
 
-        .dashboard-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        {"}"}
+.dashboard-card h3 {
+    color: #764ba2;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
 
-        .dashboard-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        {"}"}
+.mood-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        .dashboard-card h3 {
-            color: #764ba2;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        {"}"}
+.mood-emoji {
+    font-size: 3rem;
+}
 
-        .mood-display {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        {"}"}
+.mood-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+}
 
-        .mood-emoji {
-            font-size: 3rem;
-        {"}"}
+.cycle-info {
+    text-align: center;
+}
 
-        .mood-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #555;
-        {"}"}
+.cycle-day {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #764ba2;
+    margin-bottom: 5px;
+}
 
-        .cycle-info {
-            text-align: center;
-        {"}"}
+.cycle-phase {
+    color: #667eea;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
 
-        .cycle-day {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #764ba2;
-            margin-bottom: 5px;
-        {"}"}
+.cycle-tip {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
 
-        .cycle-phase {
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 10px;
-        {"}"}
+.mood-week {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
 
-        .cycle-tip {
-            font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
-        {"}"}
+.day-mood {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    background: #f0f0f0;
+    transition: all 0.3s ease;
+}
 
-        .mood-week {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        {"}"}
+.day-mood.current {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: scale(1.1);
+}
 
-        .day-mood {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            background: #f0f0f0;
-            transition: all 0.3s ease;
-        {"}"}
+.week-insight {
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+}
 
-        .day-mood.current {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            transform: scale(1.1);
-        {"}"}
+.reminders {
+    space-y: 10px;
+}
 
-        .week-insight {
-            color: #666;
-            font-size: 0.9rem;
-            text-align: center;
-        {"}"}
+.reminder-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
 
-        .reminders {
-            space-y: 10px;
-        {"}"}
+.btn-small {
+    background: #28a745;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
 
-        .reminder-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        {"}"}
+/* Mood Check Page */
+.mood-check-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-        .btn-small {
-            background: #28a745;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 15px;
-            color: white;
-            font-size: 0.8rem;
-            cursor: pointer;
-        {"}"}
-
-        /* Mood Check Page */
-        .mood-check-container {
-            max-width: 800px;
-            margin: 0 auto;
-        {"}"}
-
-        .voice-interface {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        {"}"}
-
+.voice-interface {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
         .voice-visualizer {
             display: flex;
             justify-content: center;
@@ -454,16 +453,16 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 2px;
             animation: wave 1.5s ease-in-out infinite;
-        {"}"}
+        }
 
-        .wave:nth-child(2) { animation-delay: 0.1s; {"}"}
-        .wave:nth-child(3) { animation-delay: 0.2s; {"}"}
-        .wave:nth-child(4) { animation-delay: 0.3s; {"}"}
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
 
         @keyframes wave {
             0%, 100% { height: 20px; }
-            50% { height: 40px; {"}"}
-        {"}"}
+            50% { height: 40px; }
+        }
 
         .btn-voice {
             background: linear-gradient(135deg, #ff9a9e, #fecfef);
@@ -492,10 +491,10 @@
         {"}"}
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); {"}"}
-            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); {"}"}
-            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); {"}"}
-        {"}"}
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
 
         .voice-response {
             background: #f8f9fa;
@@ -534,7 +533,7 @@
         .mood-option .mood-emoji {
             font-size: 2.5rem;
             margin-bottom: 10px;
-        {"}"}
+        }
 
         .mood-support {
             margin-top: 30px;
@@ -580,8 +579,8 @@
         {"}"}
 
         .tab-content {
-            display: none;
-        {"}"}
+                display: none;
+        }
 
         .tab-content.active {
             display: block;
@@ -755,7 +754,7 @@
 
         .btn-large.completed {
             background: #28a745;
-        {"}"}
+        }
 
         .btn-large:hover {
             transform: translateY(-2px);
@@ -1201,7 +1200,7 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
-            {"}"}
+            }
 
             .nav-menu {
                 display: none;
@@ -1214,100 +1213,100 @@
                 flex-direction: column;
                 padding: 20px;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            {"}"}
+            }
 
             .nav-menu.active {
                 display: flex;
-            {"}"}
+            }
 
             .page-header h1 {
                 font-size: 2rem;
-            {"}"}
+            }
 
             .subtitle {
                 font-size: 1rem;
-            {"}"}
+            }
 
             .quick-actions {
                 grid-template-columns: 1fr;
-            {"}"}
+            }
 
             .dashboard-grid {
                 grid-template-columns: 1fr;
-            {"}"}
+            }
 
             .cycle-tracker,
             .pregnancy-tracker,
             .elderly-dashboard {
                 grid-template-columns: 1fr;
-            {"}"}
+            }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-            {"}"}
+            }
 
             .mood-grid {
                 grid-template-columns: repeat(2, 1fr);
-            {"}"}
+            }
 
             .support-actions {
                 flex-direction: column;
-            {"}"}
+            }
 
             .care-tabs {
                 flex-direction: column;
                 align-items: center;
-            {"}"}
+            }
 
             .insight-cards {
                 grid-template-columns: 1fr;
-            {"}"}
+            }
 
             .omnidimension-agent {
                 bottom: 20px;
                 right: 20px;
-            {"}"}
+            }
 
             .agent-toggle span {
                 display: none;
-            {"}"}
-        {"}"}
+            }
+        }
 
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
-            {"}"}
+            }
 
             .page-header {
                 padding: 20px 15px;
-            {"}"}
+            }
 
             .action-card,
             .dashboard-card,
             .settings-section {
                 padding: 20px;
-            {"}"}
+            }
 
             .modal-content {
                 margin: 10% auto;
                 padding: 30px;
-            {"}"}
+            }
 
             .breathing-circle {
                 width: 150px;
                 height: 150px;
-            {"}"}
-        {"}"}
+            }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
-    <!-- Navigation --{">"}
+    {/* Navigation */}
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="logo">🌸 MindCare Buddy</span>
+                <span class="logo">MindCare Buddy</span>
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#" class="nav-link" onclick="showPage('dashboard')">
@@ -1337,12 +1336,12 @@
         </div>
     </nav>
 
-    <!-- Dashboard Page --{">"}
+    {/* Dashboard Page */}
     <div id="dashboard" class="page active">
         <div class="container">
             <header class="page-header">
                 <h1>Welcome back! 🌸</h1>
-                <p class="subtitle">Your voice companion for emotional well-being</p>
+                <p class="subtitle">I'm Mira Your voice companion for emotional well-being</p>
             </header>
 
             <div class="quick-actions">
@@ -1416,7 +1415,7 @@
         </div>
     </div>
 
-    <!-- Mood Check Page --{">"}
+    <!-- Mood Check Page -->
     <div id="mood-check" class="page">
         <div class="container">
             <header class="page-header">
@@ -1494,7 +1493,7 @@
         </div>
     </div>
 
-    <!-- Cycle Care Page --{">"}
+    {/* Cycle Care Page */}
     <div id="cycle-care" class="page">
         <div class="container">
             <header class="page-header">
@@ -1579,7 +1578,7 @@
         </div>
     </div>
 
-    <!-- Elderly Care Page --{">"}
+    {/* Elderly Care Page */}
     <div id="elderly-care" class="page">
         <div class="container elderly-friendly">
             <header class="page-header">
@@ -1655,7 +1654,7 @@
         </div>
     </div>
 
-    <!-- Analytics Page --{">"}
+    <!-- Analytics Page -->
     <div id="analytics" class="page">
         <div class="container">
             <header class="page-header">
@@ -1727,7 +1726,7 @@
         </div>
     </div>
 
-    <!-- Settings Page --{">"}
+    <!-- Settings Page -->
     <div id="settings" class="page">
         <div class="container">
             <header class="page-header">
@@ -1749,7 +1748,7 @@
                     </div>
                     <div class="setting-item">
                         <label>Name</label>
-                        <input type="text" id="userName" placeholder="What should I call you?" value="Sarah">
+                        <input type="text" id="userName" placeholder="What should I call you?" value="Sarah" />
                     </div>
                 </div>
 
@@ -1758,21 +1757,21 @@
                     <div class="setting-item toggle">
                         <label>Daily Check-in Reminders</label>
                         <div class="toggle-switch">
-                            <input type="checkbox" id="dailyReminders" checked>
+                            <input type="checkbox" id="dailyReminders" checked />
                             <span class="slider"></span>
                         </div>
                     </div>
                     <div class="setting-item toggle">
                         <label>Cycle Notifications</label>
                         <div class="toggle-switch">
-                            <input type="checkbox" id="cycleNotifications" checked>
+                            <input type="checkbox" id="cycleNotifications" checked />
                             <span class="slider"></span>
                         </div>
                     </div>
                     <div class="setting-item toggle">
                         <label>Emergency Alerts</label>
                         <div class="toggle-switch">
-                            <input type="checkbox" id="emergencyAlerts" checked>
+                            <input type="checkbox" id="emergencyAlerts" checked />
                             <span class="slider"></span>
                         </div>
                     </div>
@@ -1814,7 +1813,7 @@
         </div>
     </div>
 
-    <!-- Breathing Exercise Modal --{">"}
+    <!-- Breathing Exercise Modal -->
     <div id="breathingModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeBreathingExercise()">&times;</span>
@@ -1830,7 +1829,7 @@
         </div>
     </div>
 
-    <!-- OmniDimension Agent --{">"}
+    <!-- OmniDimension Agent -->
     <div class="omnidimension-agent">
         <button class="agent-toggle" onclick="toggleAgent()">
             <i class="fas fa-robot"></i>
@@ -1838,4 +1837,6 @@
         </button>
     </div>
 
-    <script src="script.js"></script>
+        <script src="script.js"></script>
+    </body>
+    </html>
