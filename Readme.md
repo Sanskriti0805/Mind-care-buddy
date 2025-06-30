@@ -32,11 +32,3 @@ mind-care buddy is a voice-based AI agent that:
 - Dotenv for secret management
 
 ---
-
-## 🛠 **Setup**
-
-### 1️⃣ Clone repo
-
-```bash
-git clone https://github.com/yourusername/calmacare.git
-cd calmacare
