@@ -118,7 +118,7 @@ function showPage(pageId) {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+        &rbrace;
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -126,13 +126,13 @@ function showPage(pageId) {
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
-        }
+        &rbrace;
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }
+        &rbrace;
 
         /* Navigation */
         .navbar {
@@ -145,7 +145,7 @@ function showPage(pageId) {
             right: 0;
             z-index: 1000;
             transition: all 0.3s ease;
-        }
+        &rbrace;
 
         .nav-container {
             max-width: 1200px;
@@ -155,18 +155,18 @@ function showPage(pageId) {
             align-items: center;
             padding: 0 20px;
             height: 70px;
-        }
+        &rbrace;
 
         .logo {
             font-size: 1.5rem;
             font-weight: 600;
             color: #764ba2;
-        }
+        &rbrace;
 
         .nav-menu {
             display: flex;
             gap: 30px;
-        }
+        &rbrace;
 
         .nav-link {
             text-decoration: none;
@@ -178,19 +178,19 @@ function showPage(pageId) {
             display: flex;
             align-items: center;
             gap: 8px;
-        }
+        &rbrace;
 
         .nav-link:hover {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             transform: translateY(-2px);
-        }
+        &rbrace;
 
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-        }
+        &rbrace;
 
         .hamburger span {
             width: 25px;
@@ -198,7 +198,7 @@ function showPage(pageId) {
             background: #764ba2;
             margin: 3px 0;
             transition: 0.3s;
-        }
+        &rbrace;
 
         /* Pages */
         .page {
@@ -206,34 +206,34 @@ function showPage(pageId) {
             margin-top: 70px;
             min-height: calc(100vh - 70px);
             animation: fadeIn 0.5s ease-in;
-        }
+        &rbrace;
 
         .page.active {
             display: block;
-        }
+        &rbrace;
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+            from { opacity: 0; transform: translateY(20px); &rbrace;
+            to { opacity: 1; transform: translateY(0); &rbrace;
+        &rbrace;
 
         .page-header {
             text-align: center;
             margin-bottom: 40px;
             padding: 40px 20px;
-        }
+        &rbrace;
 
 .page-header h1 {
     font-size: 2.5rem;
     color: white;
     margin-bottom: 10px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
+&rbrace;
 .subtitle {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
-}
+&rbrace;
 
 /* Dashboard */
 .quick-actions {
@@ -241,7 +241,7 @@ function showPage(pageId) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-bottom: 40px;
-}
+&rbrace;
 
 .action-card {
     background: rgba(255, 255, 255, 0.95);
@@ -251,27 +251,27 @@ function showPage(pageId) {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
-}
+&rbrace;
 
 .action-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
+&rbrace;
 
 .action-card.primary {
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
     color: white;
-}
+&rbrace;
 
 .card-icon {
     font-size: 3rem;
     margin-bottom: 15px;
-}
+&rbrace;
 
 .action-card h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-}
+&rbrace;
 
 .btn-speak {
     background: rgba(255, 255, 255, 0.2);
@@ -283,12 +283,12 @@ function showPage(pageId) {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 15px;
-}
+&rbrace;
 
 .btn-speak:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
-}
+&rbrace;
 .btn-action {
     background: linear-gradient(135deg, #667eea, #764ba2);
     border: none;
@@ -299,18 +299,18 @@ function showPage(pageId) {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 15px;
-}
+&rbrace;
 
 .btn-action:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
+&rbrace;
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-}
+&rbrace;
 
 .dashboard-card {
     background: rgba(255, 255, 255, 0.95);
@@ -318,63 +318,63 @@ function showPage(pageId) {
     padding: 25px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
+&rbrace;
 
 .dashboard-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
+&rbrace;
 
 .dashboard-card h3 {
     color: #764ba2;
     margin-bottom: 20px;
     font-size: 1.3rem;
-}
+&rbrace;
 
 .mood-display {
     display: flex;
     align-items: center;
     gap: 15px;
-}
+&rbrace;
 
 .mood-emoji {
     font-size: 3rem;
-}
+&rbrace;
 
 .mood-text {
     font-size: 1.2rem;
     font-weight: 500;
     color: #555;
-}
+&rbrace;
 
 .cycle-info {
     text-align: center;
-}
+&rbrace;
 
 .cycle-day {
     font-size: 2rem;
     font-weight: 600;
     color: #764ba2;
     margin-bottom: 5px;
-}
+&rbrace;
 
 .cycle-phase {
     color: #667eea;
     font-weight: 500;
     margin-bottom: 10px;
-}
+&rbrace;
 
 .cycle-tip {
     font-size: 0.9rem;
     color: #666;
     font-style: italic;
-}
+&rbrace;
 
 .mood-week {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
-}
+&rbrace;
 
 .day-mood {
     width: 35px;
@@ -386,23 +386,23 @@ function showPage(pageId) {
     font-size: 1.2rem;
     background: #f0f0f0;
     transition: all 0.3s ease;
-}
+&rbrace;
 
 .day-mood.current {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
     transform: scale(1.1);
-}
+&rbrace;
 
 .week-insight {
     color: #666;
     font-size: 0.9rem;
     text-align: center;
-}
+&rbrace;
 
 .reminders {
     space-y: 10px;
-}
+&rbrace;
 
 .reminder-item {
     display: flex;
@@ -412,7 +412,7 @@ function showPage(pageId) {
     background: #f8f9fa;
     border-radius: 10px;
     margin-bottom: 10px;
-}
+&rbrace;
 
 .btn-small {
     background: #28a745;
@@ -422,13 +422,13 @@ function showPage(pageId) {
     color: white;
     font-size: 0.8rem;
     cursor: pointer;
-}
+&rbrace;
 
 /* Mood Check Page */
 .mood-check-container {
     max-width: 800px;
     margin: 0 auto;
-}
+&rbrace;
 
 .voice-interface {
     background: rgba(255, 255, 255, 0.95);
@@ -437,7 +437,7 @@ function showPage(pageId) {
     text-align: center;
     margin-bottom: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+&rbrace;
         .voice-visualizer {
             display: flex;
             justify-content: center;
@@ -445,7 +445,7 @@ function showPage(pageId) {
             gap: 5px;
             height: 60px;
             margin-bottom: 30px;
-        {"}"}
+        &rbrace;
 
         .wave {
             width: 4px;
@@ -453,16 +453,16 @@ function showPage(pageId) {
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 2px;
             animation: wave 1.5s ease-in-out infinite;
-        }
+        &rbrace;
 
-        .wave:nth-child(2) { animation-delay: 0.1s; }
-        .wave:nth-child(3) { animation-delay: 0.2s; }
-        .wave:nth-child(4) { animation-delay: 0.3s; }
+        .wave:nth-child(2) { animation-delay: 0.1s; &rbrace;
+        .wave:nth-child(3) { animation-delay: 0.2s; &rbrace;
+        .wave:nth-child(4) { animation-delay: 0.3s; &rbrace;
 
         @keyframes wave {
             0%, 100% { height: 20px; }
-            50% { height: 40px; }
-        }
+            50% { height: 40px; &rbrace;
+        &rbrace;
 
         .btn-voice {
             background: linear-gradient(135deg, #ff9a9e, #fecfef);
@@ -491,10 +491,10 @@ function showPage(pageId) {
         {"}"}
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
-        }
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); &rbrace;
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); &rbrace;
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); &rbrace;
+        &rbrace;
 
         .voice-response {
             background: #f8f9fa;
@@ -533,7 +533,7 @@ function showPage(pageId) {
         .mood-option .mood-emoji {
             font-size: 2.5rem;
             margin-bottom: 10px;
-        }
+        &rbrace;
 
         .mood-support {
             margin-top: 30px;
@@ -580,7 +580,7 @@ function showPage(pageId) {
 
         .tab-content {
                 display: none;
-        }
+        &rbrace;
 
         .tab-content.active {
             display: block;
@@ -754,7 +754,7 @@ function showPage(pageId) {
 
         .btn-large.completed {
             background: #28a745;
-        }
+        &rbrace;
 
         .btn-large:hover {
             transform: translateY(-2px);
@@ -1200,7 +1200,7 @@ function showPage(pageId) {
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
-            }
+            &rbrace;
 
             .nav-menu {
                 display: none;
@@ -1213,90 +1213,90 @@ function showPage(pageId) {
                 flex-direction: column;
                 padding: 20px;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            }
+            &rbrace;
 
             .nav-menu.active {
                 display: flex;
-            }
+            &rbrace;
 
             .page-header h1 {
                 font-size: 2rem;
-            }
+            &rbrace;
 
             .subtitle {
                 font-size: 1rem;
-            }
+            &rbrace;
 
             .quick-actions {
                 grid-template-columns: 1fr;
-            }
+            &rbrace;
 
             .dashboard-grid {
                 grid-template-columns: 1fr;
-            }
+            &rbrace;
 
             .cycle-tracker,
             .pregnancy-tracker,
             .elderly-dashboard {
                 grid-template-columns: 1fr;
-            }
+            &rbrace;
 
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
+            &rbrace;
 
             .mood-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
+            &rbrace;
 
             .support-actions {
                 flex-direction: column;
-            }
+            &rbrace;
 
             .care-tabs {
                 flex-direction: column;
                 align-items: center;
-            }
+            &rbrace;
 
             .insight-cards {
                 grid-template-columns: 1fr;
-            }
+            &rbrace;
 
             .omnidimension-agent {
                 bottom: 20px;
                 right: 20px;
-            }
+            &rbrace;
 
             .agent-toggle span {
                 display: none;
-            }
-        }
+            &rbrace;
+        &rbrace;
 
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
-            }
+            &rbrace;
 
             .page-header {
                 padding: 20px 15px;
-            }
+            &rbrace;
 
             .action-card,
             .dashboard-card,
             .settings-section {
                 padding: 20px;
-            }
+            &rbrace;
 
             .modal-content {
                 margin: 10% auto;
                 padding: 30px;
-            }
+            &rbrace;
 
             .breathing-circle {
                 width: 150px;
                 height: 150px;
-            }
-        }
+            &rbrace;
+        &rbrace;
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -1415,7 +1415,7 @@ function showPage(pageId) {
         </div>
     </div>
 
-    <!-- Mood Check Page -->
+    <!-- Mood Check Page --&gt;
     <div id="mood-check" class="page">
         <div class="container">
             <header class="page-header">
@@ -1654,7 +1654,7 @@ function showPage(pageId) {
         </div>
     </div>
 
-    <!-- Analytics Page -->
+    <!-- Analytics Page --&gt;
     <div id="analytics" class="page">
         <div class="container">
             <header class="page-header">
@@ -1726,7 +1726,7 @@ function showPage(pageId) {
         </div>
     </div>
 
-    <!-- Settings Page -->
+    <!-- Settings Page --&gt;
     <div id="settings" class="page">
         <div class="container">
             <header class="page-header">
@@ -1813,7 +1813,7 @@ function showPage(pageId) {
         </div>
     </div>
 
-    <!-- Breathing Exercise Modal -->
+    <!-- Breathing Exercise Modal --&gt;
     <div id="breathingModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeBreathingExercise()">&times;</span>
@@ -1829,7 +1829,7 @@ function showPage(pageId) {
         </div>
     </div>
 
-    <!-- OmniDimension Agent -->
+    <!-- OmniDimension Agent --&gt;
     <div class="omnidimension-agent">
         <button class="agent-toggle" onclick="toggleAgent()">
             <i class="fas fa-robot"></i>
